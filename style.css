@@ -852,30 +852,38 @@ ul {
 @media (min-width: 769px) {
   #hero {
     padding-top: 110px;          /* clear the desktop navbar */
-    padding-bottom: 30px;
+    padding-bottom: 0;           /* avatar must touch the bottom of the screen */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align content to top if overflowing */
+    justify-content: flex-end;   /* anchor contents to the bottom */
   }
 
   #hero .hero-content {
-    margin-top: auto;
-    margin-bottom: auto;
-    height: auto;
+    height: calc(100vh - 110px); /* span the entire height below the navbar */
+    display: flex;
+    align-items: center;         /* vertically center the text on the left */
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
   }
 
   #hero .hero-image-container {
-    height: 55vh;
-    max-height: 520px;
-    min-height: 300px;
+    height: 100%;                /* fill the entire height of the content area */
+    max-height: none;
+    min-height: 0;
+    display: flex;
+    align-items: flex-end;       /* anchor the avatar image to the bottom */
+    justify-content: flex-end;
   }
 
   #hero .hero-avatar {
     min-height: 0;
-    height: 100%;
-    max-height: none;
+    height: 100%;                /* cover the entire length */
+    max-height: 100%;
     width: auto;
     object-fit: contain;
+    object-position: bottom;     /* align bottom edge */
   }
 
   #contact {
