@@ -502,7 +502,7 @@ ul {
   top: 0;
   left: 0;
   width: 200%;
-  height: 400%;                /* Taller layout to load more scrollable content of the project page */
+  height: 300%;                /* 300% height reduces empty space on landing sections */
   transform: scale(0.5);
   transform-origin: top left;
   border: none;
@@ -513,7 +513,7 @@ ul {
 
 /* Smooth continuous auto-scrolling for active project iframe to simulate organic vertical site navigation */
 .project-card[data-position="0"] .card-media iframe {
-  animation: autoScrollWebpage 32s ease-in-out infinite;
+  animation: autoScrollWebpage 2s ease-in-out infinite; /* Speedy 2s loop to match project slide transition */
 }
 
 .project-card[data-position="0"]:hover .card-media iframe {
@@ -525,16 +525,13 @@ ul {
     top: 0;
   }
   45% {
-    top: -100%;                /* Scroll vertically to expose lower content immediately */
+    top: -50%;                 /* Scroll down quickly to expose lower content */
   }
-  58% {
-    top: -100%;                /* Hold at the scrolled bottom position */
-  }
-  90% {
-    top: 0;                    /* Scroll back up to the top */
+  55% {
+    top: -50%;                 /* Hold briefly at bottom */
   }
   100% {
-    top: 0;
+    top: 0;                    /* Scroll back up to the top */
   }
 }
 

@@ -347,8 +347,8 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
 
-    // Auto Shuffle every 6 seconds - pauses when user is hovering the deck
-    let autoShuffleInterval = setInterval(nextSlide, 6000);
+    // Auto Shuffle every 2 seconds - pauses when user is hovering the deck
+    let autoShuffleInterval = setInterval(nextSlide, 2000);
     
     const container = document.querySelector('.project-deck-container');
     if (container) {
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(autoShuffleInterval);
       });
       container.addEventListener('mouseleave', () => {
-        autoShuffleInterval = setInterval(nextSlide, 6000);
+        autoShuffleInterval = setInterval(nextSlide, 2000);
       });
     }
 
