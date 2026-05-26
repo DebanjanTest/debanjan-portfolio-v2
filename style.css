@@ -19,6 +19,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%; /* 1rem = 10px */
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -177,12 +178,16 @@ ul {
 
 /* ═══════════════════════════════════════════ SECTIONS ═══════════════════════════════════════════ */
 .section {
-  min-height: 100vh;
+  height: 100vh;
+  height: 100svh;
   padding: var(--spacing-section) 5%;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
 }
 
 .section-inner {
