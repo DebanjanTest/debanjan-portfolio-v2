@@ -850,6 +850,18 @@ ul {
 
 /* Viewport Fitting for Desktop Screen Heights */
 @media (min-width: 769px) {
+  #hero {
+    padding-top: 120px;          /* clear the desktop navbar */
+    justify-content: flex-end;   /* Shift towards bottom to prevent navbar collision */
+    padding-bottom: 8vh;
+  }
+
+  #contact {
+    padding-top: 120px;          /* clear the desktop navbar */
+    justify-content: flex-end;   /* Shift towards bottom to prevent navbar collision */
+    padding-bottom: 4vh;
+  }
+
   #projects {
     height: 100vh;
     overflow: hidden;
