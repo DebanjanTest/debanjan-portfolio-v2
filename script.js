@@ -235,8 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
         indicator.classList.toggle('active', idx === activeIndex);
       });
 
-      // Lazy load/unload iframes based on active state
-      lazyLoadIframes();
+      // Only lazy load if not currently transitioning to avoid animation stutters
+      if (!isTransitioning) {
+        lazyLoadIframes();
+      }
     }
 
     // Handle iframe updates when switching between mobile/desktop widths
@@ -263,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         currentActiveCard.classList.remove('shuffle-left');
         isTransitioning = false;
+        lazyLoadIframes();
       }, 600); // matches the 0.6s CSS animation duration
     }
 
@@ -291,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         targetCard.classList.remove('shuffle-reverse');
         isTransitioning = false;
+        lazyLoadIframes();
       }, 600);
     }
 
@@ -319,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
               c.setAttribute('data-position', pos);
             });
             isTransitioning = false;
+            lazyLoadIframes();
           }, 300);
         }
       });
@@ -338,6 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           setTimeout(() => {
             isTransitioning = false;
+            lazyLoadIframes();
           }, 600);
         }
       });
