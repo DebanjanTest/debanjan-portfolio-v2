@@ -1061,8 +1061,9 @@ input:focus, textarea:focus {
     padding: 7rem 5% 3rem 5%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    overflow: hidden;              /* No internal scrollbar, content clips cleanly */
+    justify-content: center;       /* Vertically centered */
+    align-items: center;           /* Horizontally centered */
+    overflow: hidden;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
@@ -1093,20 +1094,23 @@ input:focus, textarea:focus {
     font-size: 1.2rem;
   }
 
-  /* 3. Hero Section — avatar on top, text below */
+  /* 3. Hero Section — avatar on top full-width, text block centered below */
   #hero {
     padding: 0;
-    padding-top: 5.5rem; /* navbar clearance */
-    justify-content: flex-start;
+    padding-top: 5rem;          /* navbar clearance */
+    justify-content: center;    /* Vertically center the whole hero block */
+    align-items: center;
   }
 
   .hero-content {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 0;
     gap: 0;
     width: 100%;
+    height: 100%;
     position: static;
   }
 
