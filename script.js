@@ -197,9 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
           // On mobile, preload only the active card (0) and the immediate next card (1) to keep it smooth
           shouldLoad = (pos === 0 || pos === 1);
         } else {
-          // On PC/Desktop, preload active (0), next (1), next-next (2), and previous (N-1) cards
-          // This makes shuffling transitions forward and backward instantaneous
-          shouldLoad = (pos === 0 || pos === 1 || pos === 2 || pos === N - 1);
+          // On PC/Desktop, preload active (0), next (1), and previous (N-1) cards
+          // This keeps shuffling transitions forward and backward instant while releasing 25% CPU threads
+          shouldLoad = (pos === 0 || pos === 1 || pos === N - 1);
         }
 
         if (shouldLoad) {

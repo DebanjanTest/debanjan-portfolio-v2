@@ -503,12 +503,13 @@ ul {
   left: 0;
   width: 200%;
   height: 300%;                /* 300% height reduces empty space on landing sections */
-  transform: scale(0.5);
+  transform: scale(0.5) translateY(0);
   transform-origin: top left;
   border: none;
   background: #000;
   pointer-events: none;
-  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth reset transition for top position when card goes inactive */
+  will-change: transform;      /* GPU accelerate layer promotion */
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Hardware-accelerated smooth transition when card goes inactive */
 }
 
 /* Smooth continuous auto-scrolling for active project iframe to simulate organic vertical site navigation */
@@ -522,16 +523,16 @@ ul {
 
 @keyframes autoScrollWebpage {
   0% {
-    top: 0;
+    transform: scale(0.5) translateY(0);
   }
   45% {
-    top: -50%;                 /* Scroll down quickly to expose lower content */
+    transform: scale(0.5) translateY(-33.33%); /* Scroll down quickly to expose lower content */
   }
   55% {
-    top: -50%;                 /* Hold briefly at bottom */
+    transform: scale(0.5) translateY(-33.33%); /* Hold briefly at bottom */
   }
   100% {
-    top: 0;                    /* Scroll back up to the top */
+    transform: scale(0.5) translateY(0);       /* Scroll back up to the top */
   }
 }
 
