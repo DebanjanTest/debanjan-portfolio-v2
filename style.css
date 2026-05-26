@@ -524,11 +524,8 @@ ul {
   0% {
     top: 0;
   }
-  12% {
-    top: 0;                    /* Hold at top to allow loading / visual rest */
-  }
   45% {
-    top: -100%;                /* Scroll vertically to expose lower content */
+    top: -100%;                /* Scroll vertically to expose lower content immediately */
   }
   58% {
     top: -100%;                /* Hold at the scrolled bottom position */
