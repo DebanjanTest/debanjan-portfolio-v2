@@ -851,15 +851,48 @@ ul {
 /* Viewport Fitting for Desktop Screen Heights */
 @media (min-width: 769px) {
   #hero {
-    padding-top: 120px;          /* clear the desktop navbar */
-    justify-content: flex-end;   /* Shift towards bottom to prevent navbar collision */
-    padding-bottom: 8vh;
+    padding-top: 110px;          /* clear the desktop navbar */
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top if overflowing */
+  }
+
+  #hero .hero-content {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: auto;
+  }
+
+  #hero .hero-image-container {
+    height: 55vh;
+    max-height: 520px;
+    min-height: 300px;
+  }
+
+  #hero .hero-avatar {
+    min-height: 0;
+    height: 100%;
+    max-height: none;
+    width: auto;
+    object-fit: contain;
   }
 
   #contact {
-    padding-top: 120px;          /* clear the desktop navbar */
-    justify-content: flex-end;   /* Shift towards bottom to prevent navbar collision */
-    padding-bottom: 4vh;
+    padding-top: 110px;          /* clear the desktop navbar */
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top if overflowing */
+  }
+
+  #contact .contact-container {
+    margin-top: auto;
+  }
+
+  #contact .footer {
+    margin-top: auto;
+    margin-bottom: 0;
   }
 
   #projects {
@@ -1136,24 +1169,26 @@ input:focus, textarea:focus {
     padding: 0.6rem 1.2rem;
     font-size: 1.2rem;
   }
-
   /* 3. Hero Section — avatar on top full-width, text block centered below */
   #hero {
-    padding: 0;
-    padding-top: 7rem;          /* increased navbar clearance */
-    justify-content: flex-end;  /* Shift towards bottom */
+    padding: 0 5%;
+    padding-top: 7.5rem;        /* increased navbar clearance */
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top if overflowing */
     align-items: center;
   }
 
   .hero-content {
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;  /* Shift everything a bit more to the bottom */
     text-align: center;
-    padding: 0 0 3.5rem 0;      /* Safe padding at the bottom */
+    margin-top: auto;
+    margin-bottom: auto;
     gap: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     position: static;
   }
 
@@ -1437,14 +1472,17 @@ input:focus, textarea:focus {
   /* 8. Contact Section Styling */
   #contact {
     overflow: visible; /* Allow scrolling when virtual keyboard opens */
-    justify-content: flex-end; /* Shift everything a bit more to the bottom */
-    padding-bottom: 2rem;      /* Safe space at the bottom */
     padding-top: 8rem;         /* Clearance for navbar to avoid overlay cropping */
+    padding-bottom: 2rem;      /* Safe space at the bottom */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top if overflowing */
   }
 
   .contact-container {
     flex-direction: column;
     gap: 1.5rem;               /* Reduced gap from 2.5rem to save vertical height */
+    margin-top: auto;
   }
 
   .contact-info {
@@ -1491,7 +1529,8 @@ input:focus, textarea:focus {
     padding: 1.5rem 0 0.5rem 0; /* Reduced from 4rem to save 50px */
     border-top: 1px solid rgba(255,255,255,0.05);
     font-size: 1.1rem;
-    margin-top: 1rem;          /* Compact footer margin */
+    margin-top: auto;          /* Push to bottom using auto margin */
+    margin-bottom: 0;
   }
 }
 
@@ -1527,7 +1566,7 @@ input:focus, textarea:focus {
   }
   .footer {
     padding: 0.8rem 0 0.2rem 0;
-    margin-top: 0.5rem;
+    margin-top: auto;
   }
 }
 
