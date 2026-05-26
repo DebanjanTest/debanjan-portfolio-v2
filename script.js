@@ -61,26 +61,28 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
     }
 
-    // Combined Scroll Parallax + Mouse Offset Parallax for Logo Cards
-    parallaxElements.forEach((el) => {
-      const speed = el._speed;
-      let yScrollOffset = 0;
-      
-      const secInfo = sectionOffsets[el._sectionIdx];
-      if (secInfo) {
-        // Calculate scroll relative to the parent section
-        const relativeScroll = scrollY - secInfo.top;
-        yScrollOffset = relativeScroll * speed;
-      } else {
-        yScrollOffset = scrollY * speed;
-      }
-      
-      // Calculate a subtle offset based on mouse position relative to center of the viewport
-      const xMouseOffset = ((mouseX / windowWidth) - 0.5) * -40 * Math.abs(speed);
-      const yMouseOffset = ((mouseY / windowHeight) - 0.5) * -40 * Math.abs(speed);
-      
-      el.style.transform = `translate3d(${xMouseOffset}px, ${yScrollOffset + yMouseOffset}px, 0)`;
-    });
+    // Combined Scroll Parallax + Mouse Offset Parallax for Logo Cards (Bypassed on mobile for performance)
+    if (windowWidth > 1024) {
+      parallaxElements.forEach((el) => {
+        const speed = el._speed;
+        let yScrollOffset = 0;
+        
+        const secInfo = sectionOffsets[el._sectionIdx];
+        if (secInfo) {
+          // Calculate scroll relative to the parent section
+          const relativeScroll = scrollY - secInfo.top;
+          yScrollOffset = relativeScroll * speed;
+        } else {
+          yScrollOffset = scrollY * speed;
+        }
+        
+        // Calculate a subtle offset based on mouse position relative to center of the viewport
+        const xMouseOffset = ((mouseX / windowWidth) - 0.5) * -40 * Math.abs(speed);
+        const yMouseOffset = ((mouseY / windowHeight) - 0.5) * -40 * Math.abs(speed);
+        
+        el.style.transform = `translate3d(${xMouseOffset}px, ${yScrollOffset + yMouseOffset}px, 0)`;
+      });
+    }
 
     requestAnimationFrame(updateVisuals);
   }
