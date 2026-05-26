@@ -383,49 +383,16 @@ ul {
   background: var(--accent-color);
 }
 
-.expertise-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  width: 100%;
-}
-
-.expertise-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.expertise-subheading {
-  font-family: var(--font-heading);
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: var(--accent-color);
-  letter-spacing: -0.5px;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 1.2rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.expertise-subheading i {
-  width: 2.4rem;
-  height: 2.4rem;
-  color: var(--accent-color);
-}
-
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
 .expertise-card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.1);
-  padding: 4rem 3rem;
+  padding: 2.5rem 2rem;
   border-radius: 10px;
   transition: all 0.3s;
   position: relative;
@@ -455,21 +422,22 @@ ul {
 }
 
 .card-icon {
-  width: 4rem;
-  height: 4rem;
+  width: 3.2rem;
+  height: 3.2rem;
   color: var(--accent-color);
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 .expertise-card h3 {
   font-family: var(--font-heading);
-  font-size: 2.4rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
 }
 
 .expertise-card p {
   color: var(--text-secondary);
-  font-size: 1.6rem;
+  font-size: 1.35rem;
+  line-height: 1.4;
 }
 
 /* ═══════════════════════════════════════════ PROJECTS ═══════════════════════════════════════════ */
@@ -1172,6 +1140,11 @@ input:focus, textarea:focus {
   .nav-links {
     display: none;
   }
+
+  .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1365,25 +1338,6 @@ input:focus, textarea:focus {
   #services {
     padding-top: 8rem;
     padding-bottom: 4rem;
-  }
-
-  .expertise-wrapper {
-    gap: 3.5rem;
-  }
-
-  .expertise-section {
-    gap: 1.5rem;
-  }
-
-  .expertise-subheading {
-    font-size: 1.8rem;
-    gap: 0.8rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .expertise-subheading i {
-    width: 2rem;
-    height: 2rem;
   }
 
   .expertise-grid {
