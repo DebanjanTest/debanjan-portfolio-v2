@@ -513,7 +513,7 @@ ul {
 
 /* Smooth continuous auto-scrolling for active project iframe to simulate organic vertical site navigation */
 .project-card[data-position="0"] .card-media iframe {
-  animation: autoScrollWebpage 2s ease-in-out infinite; /* Speedy 2s loop to match project slide transition */
+  animation: autoScrollWebpage 5s ease-in-out infinite; /* Smooth 5s loop */
 }
 
 .project-card[data-position="0"]:hover .card-media iframe {
