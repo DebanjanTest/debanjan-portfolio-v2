@@ -1274,6 +1274,27 @@ input:focus, textarea:focus {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 27, 75, 0.6) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .card-media iframe {
+    display: none !important; /* Hide the unloaded iframe on mobile */
+  }
+
+  .card-media::before {
+    content: "✨ TAP 'LAUNCH APP' TO VIEW";
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    z-index: 3;
+    opacity: 0.85;
   }
 
   .card-info {

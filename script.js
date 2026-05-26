@@ -181,6 +181,40 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeIndex = 0;
     let isTransitioning = false;
 
+    function lazyLoadIframes() {
+      if (isMobile()) {
+        // On mobile, keep all iframes unloaded to maximize performance
+        cards.forEach(card => {
+          const iframe = card.querySelector('iframe');
+          if (iframe && iframe.getAttribute('src') !== 'about:blank') {
+            iframe.setAttribute('src', 'about:blank');
+          }
+        });
+        return;
+      }
+
+      // On PC/Desktop: only load the active card's iframe
+      cards.forEach((card, i) => {
+        const iframe = card.querySelector('iframe');
+        if (!iframe) return;
+
+        const pos = (i - activeIndex + N) % N;
+        const dataSrc = iframe.getAttribute('data-src');
+
+        if (pos === 0) {
+          // If this is the active card, load its src if not already loaded
+          if (iframe.getAttribute('src') !== dataSrc && dataSrc) {
+            iframe.setAttribute('src', dataSrc);
+          }
+        } else {
+          // If it's a background card, unload it to save resources
+          if (iframe.getAttribute('src') !== 'about:blank') {
+            iframe.setAttribute('src', 'about:blank');
+          }
+        }
+      });
+    }
+
     function updateDeck() {
       cards.forEach((card, i) => {
         // Calculate the stacked position relative to the activeIndex
@@ -199,7 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
       indicators.forEach((indicator, idx) => {
         indicator.classList.toggle('active', idx === activeIndex);
       });
+
+      // Lazy load/unload iframes based on active state
+      lazyLoadIframes();
     }
+
+    // Handle iframe updates when switching between mobile/desktop widths
+    window.addEventListener('resize', lazyLoadIframes);
 
     function nextSlide() {
       if (isTransitioning) return;
