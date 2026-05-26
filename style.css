@@ -1045,14 +1045,26 @@ input:focus, textarea:focus {
 }
 
 @media (max-width: 768px) {
-  /* 1. Global Section Adjustments */
+  /* ── Hide scrollbar on mobile ── */
+  html {
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar { display: none; }
+  body::-webkit-scrollbar { display: none; }
+
+  /* 1. Global Section Adjustments — each section = one full screen, snaps on scroll */
   .section {
-    min-height: 100vh;
+    height: 100vh;
+    height: 100svh;
     padding: 7rem 5% 3rem 5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow-y: visible;
+    overflow: hidden;              /* No internal scrollbar, content clips cleanly */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
   
   .section-inner {
@@ -1102,13 +1114,13 @@ input:focus, textarea:focus {
   .hero-image-container {
     position: static;
     width: 100vw;          /* Break out to full viewport width */
-    margin-left: 0;        /* Hero has no horizontal padding so this is fine */
+    margin-left: 0;
     height: 75vw;          /* Tall enough for a portrait 3D avatar */
-    max-height: none;      /* No cap — let it breathe */
+    max-height: none;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    overflow: visible;
+    align-items: center;
+    overflow: hidden;      /* Clip the scaled image so transparent edges are cropped */
     order: 0;
     flex-shrink: 0;
     transform: none;
@@ -1126,12 +1138,15 @@ input:focus, textarea:focus {
     border-radius: 0;
     border: none;
     box-shadow: none;
-    object-fit: contain;       /* Show the full 3D character — don't crop */
-    object-position: bottom center;
+    object-fit: contain;
+    object-position: center center;
     opacity: 1;
     mask-image: none;
     -webkit-mask-image: none;
     transition: none;
+    /* Scale up to crop the transparent padding around the 3D character */
+    transform: scale(1.25);
+    transform-origin: center center;
   }
 
   /* Text block — sits BELOW avatar */
