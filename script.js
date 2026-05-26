@@ -131,13 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Scroll-Based Theme Color Shifts
+  // 4. Scroll-Based Theme Color Shifts (Darker premium versions)
   const sectionColors = {
-    'hero': '#0b1120',      // Deep Space Blue
-    'about': '#121212',     // Charcoal Dark
-    'services': '#0b1a1f',  // Dark Cyan
-    'projects': '#100b1a',  // Deep Purple
-    'experience': '#151515',// Dark Grey
+    'hero': '#050810',      // Deeper Space Blue
+    'about': '#090909',     // Deeper Charcoal Dark
+    'services': '#050d10',  // Deeper Cyan
+    'projects': '#08050d',  // Deeper Purple
+    'experience': '#0b0b0b',// Deeper Grey
     'contact': '#000000'    // Pure Black
   };
 
@@ -324,6 +324,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize positions
     updateDeck();
+  }
+
+  // 6. Preloader Screen Handler
+  const handlePageLoad = () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.classList.add('fade-out');
+      document.body.classList.remove('loading');
+    }
+  };
+
+  if (document.readyState === 'complete') {
+    handlePageLoad();
+  } else {
+    window.addEventListener('load', handlePageLoad);
   }
 
 });

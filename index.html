@@ -17,7 +17,18 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="dark">
+<body class="loading" data-theme="dark">
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">DM</div>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar"></div>
+      </div>
+      <p class="preloader-text">Initializing Creative Space</p>
+    </div>
+  </div>
 
   <!-- Hardware-accelerated background color layer -->
   <div class="bg-color-layer"></div>
@@ -642,11 +653,10 @@
         <button type="submit" class="btn-primary">SEND</button>
       </form>
     </div>
+    <footer class="footer">
+      <p>&copy; 2025 Debanjan Mondal. All rights reserved.</p>
+    </footer>
   </section>
-
-  <footer class="footer">
-    <p>&copy; 2025 Debanjan Mondal. All rights reserved.</p>
-  </footer>
 
   <script src="script.js"></script>
   <script>feather.replace();</script>
