@@ -502,42 +502,42 @@ ul {
   top: 0;
   left: 0;
   width: 200%;
-  height: 200%;
+  height: 400%;                /* Taller layout to load more scrollable content of the project page */
   transform: scale(0.5);
   transform-origin: top left;
   border: none;
   background: #000;
   pointer-events: none;
-  transition: transform 0.5s ease;
+  transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth reset transition for top position when card goes inactive */
 }
 
-/* Smooth continuous auto-panning showcase for active iframe preview to simulate UI movement */
+/* Smooth continuous auto-scrolling for active project iframe to simulate organic vertical site navigation */
 .project-card[data-position="0"] .card-media iframe {
-  animation: autoPanPreview 28s ease-in-out infinite;
+  animation: autoScrollWebpage 32s ease-in-out infinite;
 }
 
 .project-card[data-position="0"]:hover .card-media iframe {
   animation-play-state: paused;
 }
 
-@keyframes autoPanPreview {
+@keyframes autoScrollWebpage {
   0% {
-    transform: scale(0.5) translate(0, 0);
+    top: 0;
   }
-  20% {
-    transform: scale(0.5) translate(-10%, -6%);
+  12% {
+    top: 0;                    /* Hold at top to allow loading / visual rest */
   }
-  40% {
-    transform: scale(0.5) translate(-4%, -24%);
+  45% {
+    top: -100%;                /* Scroll vertically to expose lower content */
   }
-  60% {
-    transform: scale(0.5) translate(-20%, -12%);
+  58% {
+    top: -100%;                /* Hold at the scrolled bottom position */
   }
-  80% {
-    transform: scale(0.5) translate(-10%, -30%);
+  90% {
+    top: 0;                    /* Scroll back up to the top */
   }
   100% {
-    transform: scale(0.5) translate(0, 0);
+    top: 0;
   }
 }
 
