@@ -19,8 +19,6 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%; /* 1rem = 10px */
-  scroll-snap-type: y mandatory;
-  height: 100%;
 }
 
 body {
@@ -32,7 +30,6 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   transition: background-color 1s ease;
-  height: 100%;
 }
 
 body.loading {
@@ -180,17 +177,12 @@ ul {
 
 /* ═══════════════════════════════════════════ SECTIONS ═══════════════════════════════════════════ */
 .section {
-  height: 100vh;
-  height: 100svh;
+  min-height: 100vh;
   padding: var(--spacing-section) 5%;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .section-inner {
@@ -1055,14 +1047,12 @@ input:focus, textarea:focus {
 @media (max-width: 768px) {
   /* 1. Global Section Adjustments */
   .section {
-    height: 100vh;
-    height: 100svh;
+    min-height: 100vh;
     padding: 7rem 5% 3rem 5%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    overflow-y: visible;
   }
   
   .section-inner {
@@ -1091,44 +1081,40 @@ input:focus, textarea:focus {
     font-size: 1.2rem;
   }
 
-  /* 3. Hero Section */
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 2rem;
-    gap: 1rem;
-    height: 100%;
-    justify-content: space-between;
-    position: relative;
-    z-index: 2;
-  }
-  
-  .hero-text {
-    margin-top: auto;
-    margin-bottom: auto;
-    position: relative;
-    z-index: 3;
-    padding: 0 1.5rem;
-    width: 100%;
+  /* 3. Hero Section — avatar on top, text below */
+  #hero {
+    padding: 0;
+    padding-top: 5.5rem; /* navbar clearance */
+    justify-content: flex-start;
   }
 
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    gap: 0;
+    width: 100%;
+    position: static;
+  }
+
+  /* Avatar block — sits at TOP, spans full width */
   .hero-image-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 52%;
+    position: static;
+    width: 100%;
+    height: 44vw; /* Square-ish crop spanning full breadth */
+    max-height: 260px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-bottom: 0;
-    pointer-events: none;
-    z-index: 1;
     overflow: hidden;
-    order: 0;
+    order: 0; /* first child visually */
+    flex-shrink: 0;
+    transform: none;
+    left: auto;
+    bottom: auto;
   }
-  
+
   .hero-avatar {
     width: 100%;
     height: 100%;
@@ -1139,35 +1125,52 @@ input:focus, textarea:focus {
     border-radius: 0;
     border: none;
     box-shadow: none;
-    object-fit: contain;
-    object-position: bottom center;
-    opacity: 0.45;
-    mask-image: linear-gradient(to top, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    object-fit: cover;
+    object-position: top center;
+    opacity: 1;
+    mask-image: none;
+    -webkit-mask-image: none;
     transition: none;
   }
 
-  .hero-tagline {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+  /* Text block — sits BELOW avatar */
+  .hero-text {
+    order: 1; /* second child visually */
+    width: 100%;
+    padding: 2rem 5% 2.5rem;
+    position: static;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+  /* Name FIRST, then tagline below — via CSS order */
   .hero-name {
+    order: 1;
     font-size: 3.4rem;
     line-height: 1;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
     letter-spacing: -1px;
   }
 
+  .hero-tagline {
+    order: 2;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1.5px;
+  }
+
   .hero-description {
+    order: 3;
     font-size: 1.4rem;
     margin-bottom: 2rem;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 100%;
+    line-height: 1.5;
   }
 
   .hero-text .btn-primary {
+    order: 4;
     padding: 1.2rem 2.8rem;
     font-size: 1.4rem;
   }
@@ -1768,5 +1771,23 @@ input:focus, textarea:focus {
     font-size: 4rem;
     filter: blur(1.5px);
     opacity: 0.15;
+  }
+
+  /* ── Mobile performance: stop expensive GPU-composited layers ── */
+  .cursor-glow {
+    display: none !important; /* No cursor on touch devices */
+  }
+  .blob {
+    will-change: auto; /* Release GPU layer reservation */
+    contain: layout paint;
+    animation-duration: 60s; /* Slow blobs way down to reduce compositor workload */
+  }
+  /* Disable 3D keyframe wobbles on mobile – CSS animations still run but cost less */
+  .float-3d-wobble-1,
+  .float-3d-wobble-2,
+  .float-3d-wobble-3,
+  .float-3d-wobble-4,
+  .float-3d-spin {
+    animation-duration: 30s; /* Slower = less frequent style recalc */
   }
 }
