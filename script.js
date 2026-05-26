@@ -182,18 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTransitioning = false;
 
     function lazyLoadIframes() {
-      if (isMobile()) {
-        // On mobile, keep all iframes unloaded to maximize performance
-        cards.forEach(card => {
-          const iframe = card.querySelector('iframe');
-          if (iframe && iframe.getAttribute('src') !== 'about:blank') {
-            iframe.setAttribute('src', 'about:blank');
-          }
-        });
-        return;
-      }
+      const mobile = isMobile();
 
-      // On PC/Desktop: only load the active card's iframe
       cards.forEach((card, i) => {
         const iframe = card.querySelector('iframe');
         if (!iframe) return;
@@ -201,13 +191,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const pos = (i - activeIndex + N) % N;
         const dataSrc = iframe.getAttribute('data-src');
 
-        if (pos === 0) {
-          // If this is the active card, load its src if not already loaded
+        // Determine if this card's iframe should be loaded/preloaded
+        let shouldLoad = false;
+        if (mobile) {
+          // On mobile, preload only the active card (0) and the immediate next card (1) to keep it smooth
+          shouldLoad = (pos === 0 || pos === 1);
+        } else {
+          // On PC/Desktop, preload active (0), next (1), next-next (2), and previous (N-1) cards
+          // This makes shuffling transitions forward and backward instantaneous
+          shouldLoad = (pos === 0 || pos === 1 || pos === 2 || pos === N - 1);
+        }
+
+        if (shouldLoad) {
+          // Load the source if it is not already loaded
           if (iframe.getAttribute('src') !== dataSrc && dataSrc) {
             iframe.setAttribute('src', dataSrc);
           }
         } else {
-          // If it's a background card, unload it to save resources
+          // Unload background iframes to release memory & CPU threads
           if (iframe.getAttribute('src') !== 'about:blank') {
             iframe.setAttribute('src', 'about:blank');
           }

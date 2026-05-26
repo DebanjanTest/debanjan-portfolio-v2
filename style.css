@@ -506,8 +506,34 @@ ul {
   transition: transform 0.5s ease;
 }
 
+/* Smooth continuous auto-panning showcase for active iframe preview to simulate UI movement */
+.project-card[data-position="0"] .card-media iframe {
+  animation: autoPanPreview 28s ease-in-out infinite;
+}
+
 .project-card[data-position="0"]:hover .card-media iframe {
-  transform: scale(0.52);
+  animation-play-state: paused;
+}
+
+@keyframes autoPanPreview {
+  0% {
+    transform: scale(0.5) translate(0, 0);
+  }
+  20% {
+    transform: scale(0.5) translate(-10%, -6%);
+  }
+  40% {
+    transform: scale(0.5) translate(-4%, -24%);
+  }
+  60% {
+    transform: scale(0.5) translate(-20%, -12%);
+  }
+  80% {
+    transform: scale(0.5) translate(-10%, -30%);
+  }
+  100% {
+    transform: scale(0.5) translate(0, 0);
+  }
 }
 
 /* Invisible overlay to block direct interactions with iframe unless desired */
@@ -1274,27 +1300,6 @@ input:focus, textarea:focus {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 27, 75, 0.6) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-
-  .card-media iframe {
-    display: none !important; /* Hide the unloaded iframe on mobile */
-  }
-
-  .card-media::before {
-    content: "✨ TAP 'LAUNCH APP' TO VIEW";
-    color: var(--accent-color);
-    font-size: 1.1rem;
-    font-weight: 700;
-    font-family: var(--font-heading);
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-    z-index: 3;
-    opacity: 0.85;
   }
 
   .card-info {
