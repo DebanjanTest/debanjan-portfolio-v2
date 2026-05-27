@@ -1590,18 +1590,18 @@ input:focus, textarea:focus {
     position: static;
   }
 
-  /* Avatar block — sits at TOP, spans full screen breadth */
+  /* Avatar block — sits at BOTTOM on mobile, spans full screen breadth */
   .hero-image-container {
     position: static;
     width: 100vw;          /* Break out to full viewport width */
     margin-left: 0;
-    height: 72vw;          /* Adjusted height slightly to be safe */
+    height: 65vw;          /* Adjusted height slightly to be safe */
     max-height: none;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;      /* Clip the scaled image so transparent edges are cropped */
-    order: 0;
+    order: 1;              /* MOVED TO BOTTOM */
     flex-shrink: 0;
     transform: none;
     left: auto;
@@ -1618,20 +1618,20 @@ input:focus, textarea:focus {
     border-radius: 0;
     border: none;
     box-shadow: none;
-    object-fit: contain;
-    object-position: center center;
+    object-fit: cover; /* Changed to cover to fill width */
+    object-position: center top;
     opacity: 1;
     mask-image: none;
     -webkit-mask-image: none;
     transition: none;
-    /* Scale up slightly less and translate down to keep the head from getting cropped */
-    transform: scale(1.15) translateY(4%);
+    /* Scale up significantly to hide dead/empty pixels in the PNG */
+    transform: scale(1.4) translateY(12%);
     transform-origin: center center;
   }
 
-  /* Text block — sits BELOW avatar */
+  /* Text block — sits TOP */
   .hero-text {
-    order: 1; /* second child visually */
+    order: 0; /* first child visually */
     width: 100%;
     padding: 1.5rem 5% 1.5rem; /* reduced vertical padding to prevent overflow */
     position: static;
@@ -1644,16 +1644,16 @@ input:focus, textarea:focus {
   /* Name FIRST, then tagline below — via CSS order */
   .hero-name {
     order: 1;
-    font-size: 3.4rem;
+    font-size: 4.8rem; /* Made significantly larger */
     line-height: 1;
     margin-bottom: 0.8rem;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
   }
 
   .hero-tagline {
     order: 2;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: 1.3rem; /* Made larger */
+    margin-bottom: 1.2rem;
     letter-spacing: 1.5px;
   }
 

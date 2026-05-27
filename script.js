@@ -382,11 +382,47 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const container = document.querySelector('.project-deck-container');
     if (container) {
-      container.addEventListener('mouseenter', () => {
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      const handleDragStart = (e) => {
+        if (e.target.closest('.card-action-btn') || e.target.closest('iframe')) return;
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
         clearInterval(autoShuffleInterval);
-      });
-      container.addEventListener('mouseleave', () => {
+      };
+
+      const handleDragMove = (e) => {
+        if (!isDragging) return;
+        currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+      };
+
+      const handleDragEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diffX = currentX - startX;
+        
+        if (Math.abs(diffX) > 50) {
+          if (diffX > 0) prevSlide();
+          else nextSlide();
+        }
+        clearInterval(autoShuffleInterval);
         autoShuffleInterval = setInterval(nextSlide, 4000);
+      };
+
+      container.addEventListener('touchstart', handleDragStart, { passive: true });
+      container.addEventListener('touchmove', handleDragMove, { passive: true });
+      container.addEventListener('touchend', handleDragEnd);
+
+      container.addEventListener('mousedown', handleDragStart);
+      container.addEventListener('mousemove', handleDragMove);
+      container.addEventListener('mouseup', handleDragEnd);
+
+      container.addEventListener('mouseenter', () => clearInterval(autoShuffleInterval));
+      container.addEventListener('mouseleave', () => {
+        if (isDragging) handleDragEnd();
+        else autoShuffleInterval = setInterval(nextSlide, 4000);
       });
     }
 
