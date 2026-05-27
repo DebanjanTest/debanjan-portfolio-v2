@@ -7,6 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const parallaxElements = document.querySelectorAll('.parallax-wrap');
   const navLinks = document.querySelectorAll('.nav-links a');
 
+  // Hamburger Menu Logic
+  const hamburger = document.querySelector('.hamburger-menu');
+  const navContainer = document.querySelector('.nav-links');
+
+  if (hamburger && navContainer) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navContainer.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navContainer.classList.remove('active');
+      });
+    });
+  }
   // Cache/State variables to avoid layout thrashing in requestAnimationFrame
   let windowWidth = window.innerWidth;
   let windowHeight = window.innerHeight;
