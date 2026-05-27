@@ -1570,8 +1570,8 @@ input:focus, textarea:focus {
   /* 3. Hero Section — avatar on top full-width, text block centered below */
   #hero {
     padding: 0 5%;
-    padding-top: 7.5rem;        /* increased navbar clearance */
-    padding-bottom: 2rem;
+    padding-top: 5rem;          /* Reduced to save vertical space */
+    padding-bottom: 0rem;       /* Avatar goes all the way to bottom */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Align content to top if overflowing */
@@ -1595,7 +1595,7 @@ input:focus, textarea:focus {
     position: static;
     width: 100vw;          /* Break out to full viewport width */
     margin-left: 0;
-    height: 65vw;          /* Adjusted height slightly to be safe */
+    height: 40vh;          /* Use viewport height to guarantee it fits on screen */
     max-height: none;
     display: flex;
     justify-content: center;
@@ -1633,7 +1633,7 @@ input:focus, textarea:focus {
   .hero-text {
     order: 0; /* first child visually */
     width: 100%;
-    padding: 1.5rem 5% 1.5rem; /* reduced vertical padding to prevent overflow */
+    padding: 0rem 2% 0.5rem; /* dramatically reduced vertical padding */
     position: static;
     z-index: 2;
     display: flex;
@@ -1644,9 +1644,9 @@ input:focus, textarea:focus {
   /* Name FIRST, then tagline below — via CSS order */
   .hero-name {
     order: 1;
-    font-size: 4.8rem; /* Made significantly larger */
+    font-size: clamp(3.5rem, 12vw, 4.8rem); /* Fluid scaling to prevent wrapping overflow */
     line-height: 1;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
     letter-spacing: -2px;
   }
 
