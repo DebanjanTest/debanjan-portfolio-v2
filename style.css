@@ -557,7 +557,7 @@ ul {
   transform: translateY(-4px);
 }
 
-/* Logo wrap — transparent background + colored glow */
+/* Logo wrap — prominent white background + colored glow */
 .edu-logo-wrap {
   flex-shrink: 0;
   width: clamp(72px, 8vw, 96px);
@@ -567,7 +567,9 @@ ul {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px;
+  box-sizing: border-box;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
