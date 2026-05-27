@@ -1672,7 +1672,7 @@ input:focus, textarea:focus {
     border: none;
     box-shadow: none;
     object-fit: cover; /* Cover the width completely */
-    object-position: center 10%; /* Keep the top (head) firmly in frame */
+    object-position: center bottom; /* Anchor the image to the bottom of the screen */
     opacity: 1;
     mask-image: none;
     -webkit-mask-image: none;
