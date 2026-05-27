@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'hero': '#050810',      // Deeper Space Blue
     'about': '#090909',     // Deeper Charcoal Dark
     'services': '#050d10',  // Deeper Cyan
+    'education': '#060a08', // Deep Forest Green-Black
     'projects': '#08050d',  // Deeper Purple
     'experience': '#0b0b0b',// Deeper Grey
     'contact': '#000000'    // Pure Black
@@ -169,6 +170,25 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(section => {
     colorObserver.observe(section);
   });
+
+  // 4b. Edu-card staggered entrance animation
+  const eduSection = document.getElementById('education');
+  if (eduSection) {
+    const eduCards = Array.from(eduSection.querySelectorAll('.edu-card'));
+    const eduObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          eduCards.forEach((card, i) => {
+            setTimeout(() => {
+              card.classList.add('edu-card--visible');
+            }, i * 180);
+          });
+          eduObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+    eduObserver.observe(eduSection);
+  }
 
   // 5. Card Deck Shuffle Controller
   const deck = document.querySelector('.project-deck');
