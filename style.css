@@ -1595,7 +1595,7 @@ input:focus, textarea:focus {
     position: static;
     width: 100vw;          /* Break out to full viewport width */
     margin-left: 0;
-    height: 40vh;          /* Use viewport height to guarantee it fits on screen */
+    height: 48vh;          /* Taller container allows the avatar to scale up naturally */
     max-height: none;
     display: flex;
     justify-content: center;
@@ -1618,15 +1618,15 @@ input:focus, textarea:focus {
     border-radius: 0;
     border: none;
     box-shadow: none;
-    object-fit: cover; /* Changed to cover to fill width */
-    object-position: center top;
+    object-fit: contain; /* Guarantee full body and face are visible */
+    object-position: center bottom; /* Anchor to the bottom */
     opacity: 1;
     mask-image: none;
     -webkit-mask-image: none;
     transition: none;
-    /* Scale up significantly to hide dead/empty pixels in the PNG */
-    transform: scale(1.4) translateY(12%);
-    transform-origin: center center;
+    /* Moderate scale to crop the transparent padding in the PNG without chopping off the head */
+    transform: scale(1.15) translateY(2%);
+    transform-origin: center bottom;
   }
 
   /* Text block — sits TOP */
@@ -1644,7 +1644,7 @@ input:focus, textarea:focus {
   /* Name FIRST, then tagline below — via CSS order */
   .hero-name {
     order: 1;
-    font-size: clamp(3.5rem, 12vw, 4.8rem); /* Fluid scaling to prevent wrapping overflow */
+    font-size: clamp(3.2rem, 10vw, 4.2rem); /* Slightly smaller to accommodate taller image */
     line-height: 1;
     margin-bottom: 0.5rem;
     letter-spacing: -2px;
