@@ -1532,7 +1532,7 @@ input:focus, textarea:focus {
   .section {
     height: 100vh;
     height: 100svh;
-    padding: 7rem 5% 3rem 5%;
+    padding: 5.5rem 4% 1.5rem 4%;  /* Reduced padding to maximize usable space */
     display: flex;
     flex-direction: column;
     justify-content: center;       /* Vertically centered */
@@ -1550,8 +1550,8 @@ input:focus, textarea:focus {
   }
 
   .section-heading {
-    font-size: 2.8rem;
-    margin-bottom: 1.8rem;
+    font-size: 2.3rem; /* Smaller heading to save vertical space */
+    margin-bottom: 1.2rem;
     letter-spacing: -1px;
     text-align: center;
   }
@@ -1743,18 +1743,19 @@ input:focus, textarea:focus {
 
   /* 6. Education Section */
   #education {
-    padding-top: 7.5rem;
-    padding-bottom: 2rem;
+    padding-top: 5.5rem;
+    padding-bottom: 1.5rem;
     overflow: hidden;
   }
 
   #education .section-heading {
-    font-size: clamp(3rem, 9vw, 5rem);
-    margin-bottom: 1.5rem;
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
   }
 
   .edu-timeline {
-    gap: 0.9rem;
+    gap: 0.5rem; /* Tighter gap */
+    width: 100%;
   }
 
   .edu-timeline::before {
@@ -1762,30 +1763,42 @@ input:focus, textarea:focus {
   }
 
   .edu-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.4rem 1.2rem;
+    flex-direction: row; /* Keep as row to save massive vertical space */
+    align-items: center;
+    padding: 0.8rem 0.8rem;
     gap: 0.8rem;
-    border-radius: 14px;
+    border-radius: 12px;
+    width: 100%;
   }
 
   .edu-logo-wrap {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 5px; /* Adjust padding for smaller frame */
   }
 
   .edu-school {
-    font-size: 1.45rem;
+    font-size: 1.15rem; /* Smaller text */
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
   }
 
   .edu-badge {
-    font-size: 0.88rem;
-    padding: 0.18rem 0.75rem;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
   }
 
   .edu-info, .edu-info-row {
-    font-size: 1.05rem;
+    font-size: 0.9rem;
+    gap: 0.4rem;
+  }
+
+  .edu-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
   }
 
   .edu-card-year-badge {
