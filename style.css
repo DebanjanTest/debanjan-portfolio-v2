@@ -366,27 +366,13 @@ ul {
 
 /* ═══════════════════════════════════════════ EXPERTISE ═══════════════════════════════════════════ */
 #services {
-  overflow-y: auto;
-}
-
-#services::-webkit-scrollbar {
-  width: 6px;
-}
-#services::-webkit-scrollbar-track {
-  background: transparent;
-}
-#services::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-#services::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color);
+  overflow: hidden; /* No internal scroll — everything must fit in one viewport */
 }
 
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: 1.4rem;
 }
 
 .expertise-card {
@@ -430,14 +416,14 @@ ul {
 
 .expertise-card h3 {
   font-family: var(--font-heading);
-  font-size: 2rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .expertise-card p {
   color: var(--text-secondary);
-  font-size: 1.35rem;
-  line-height: 1.4;
+  font-size: 1.25rem;
+  line-height: 1.35;
 }
 
 /* ═══════════════════════════════════════════ PROJECTS ═══════════════════════════════════════════ */
@@ -917,6 +903,52 @@ ul {
     margin-bottom: 0;
   }
 
+  /* ── Expertise: pin below navbar, no scroll, fill viewport ── */
+  #services {
+    padding-top: 110px;          /* clear the fixed navbar */
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #services .section-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  #services .section-heading {
+    font-size: clamp(3.5rem, 6vw, 7rem);  /* scale heading down so cards have space */
+    margin-bottom: clamp(1.5rem, 2.5vh, 3rem);
+  }
+
+  #services .expertise-grid {
+    gap: clamp(1rem, 1.5vh, 1.8rem);
+  }
+
+  #services .expertise-card {
+    padding: clamp(1.5rem, 2vh, 2.5rem) clamp(1.2rem, 1.5vw, 2rem);
+  }
+
+  #services .card-icon {
+    width: clamp(2.4rem, 2.8vh, 3.2rem);
+    height: clamp(2.4rem, 2.8vh, 3.2rem);
+    margin-bottom: clamp(0.8rem, 1vh, 1.2rem);
+  }
+
+  #services .expertise-card h3 {
+    font-size: clamp(1.4rem, 1.8vh, 1.8rem);
+    margin-bottom: clamp(0.3rem, 0.5vh, 0.6rem);
+  }
+
+  #services .expertise-card p {
+    font-size: clamp(1rem, 1.3vh, 1.3rem);
+    line-height: 1.3;
+  }
+
   #projects {
     height: 100vh;
     overflow: hidden;
@@ -1336,17 +1368,18 @@ input:focus, textarea:focus {
 
   /* 5. Expertise (Services) Section */
   #services {
-    padding-top: 8rem;
-    padding-bottom: 4rem;
+    padding-top: 7.5rem;          /* match other mobile sections — clears the navbar */
+    padding-bottom: 2rem;
+    overflow: hidden;
   }
 
   .expertise-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
+    gap: 1rem;
   }
   
   .expertise-card {
-    padding: 1.5rem 1rem;
+    padding: 1.2rem 0.8rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -1354,18 +1387,18 @@ input:focus, textarea:focus {
   }
   
   .card-icon {
-    width: 2.6rem;
-    height: 2.6rem;
-    margin-bottom: 0.8rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-bottom: 0.6rem;
   }
   
   .expertise-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.4rem;
+    font-size: 1.35rem;
+    margin-bottom: 0.3rem;
   }
   
   .expertise-card p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.2;
   }
 
