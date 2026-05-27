@@ -19,6 +19,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%; /* 1rem = 10px */
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -184,6 +185,8 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   overflow: hidden;
 }
 
@@ -1519,6 +1522,7 @@ input:focus, textarea:focus {
 @media (max-width: 768px) {
   /* ── Hide scrollbar on mobile ── */
   html {
+    scroll-snap-type: y mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -1534,6 +1538,8 @@ input:focus, textarea:focus {
     flex-direction: column;
     justify-content: center;       /* Vertically centered */
     align-items: center;           /* Horizontally centered */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     overflow: hidden;
   }
   
