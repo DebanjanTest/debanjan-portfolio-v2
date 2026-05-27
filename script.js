@@ -70,6 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let yScrollOffset = 0;
         const secInfo = sectionOffsets[el._sectionIdx];
         if (secInfo) {
+          // Performance fix: skip DOM updates for elements in sections that are off-screen
+          if (scrollY < secInfo.top - windowHeight - 200 || scrollY > secInfo.top + secInfo.height + 200) {
+            return; 
+          }
           const relativeScroll = scrollY - secInfo.top;
           yScrollOffset = relativeScroll * speed;
         } else {

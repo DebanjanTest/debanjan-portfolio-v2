@@ -487,8 +487,7 @@ ul {
   padding: clamp(1.4rem, 2vh, 2.2rem) clamp(1.8rem, 2.5vw, 3rem);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  /* Removed backdrop-filter: blur(8px) for major scroll performance boost */
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
